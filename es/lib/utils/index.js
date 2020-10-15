@@ -142,6 +142,10 @@ export function getTouchProps(touch) {
 }
 
 export function getClosestItemIndexes(array, value, accessor, log) {
+	if (!value || !array.length) {
+		return { left: 0, right: 0 };
+	}
+
 	var lo = 0,
 	    hi = array.length - 1;
 	while (hi - lo > 1) {
@@ -152,6 +156,7 @@ export function getClosestItemIndexes(array, value, accessor, log) {
 			hi = mid;
 		}
 	}
+
 	// for Date object === does not work, so using the <= in combination with >=
 	// the same code works for both dates and numbers
 	if (accessor(array[lo]).valueOf() === value.valueOf()) hi = lo;
@@ -271,7 +276,6 @@ export function capitalizeFirst(str) {
 export function hexToRGBA(inputHex, opacity) {
 	var hex = inputHex.replace("#", "");
 	if (inputHex.indexOf("#") > -1 && (hex.length === 3 || hex.length === 6)) {
-
 		var multiplier = hex.length === 3 ? 1 : 2;
 
 		var r = parseInt(hex.substring(0, 1 * multiplier), 16);

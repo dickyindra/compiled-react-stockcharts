@@ -247,9 +247,6 @@ function calculateState(props) {
 	    plotData = _filterData.plotData,
 	    domain = _filterData.domain;
 
-	if (process.env.NODE_ENV !== "production" && plotData.length <= 1) {
-		throw new Error("Showing " + plotData.length + " datapoints, review the 'xExtents' prop of ChartCanvas");
-	}
 	return {
 		plotData: plotData,
 		xScale: updatedXScale.domain(domain),
